@@ -472,14 +472,17 @@ void processEvents(void) {
         fluxes.eventWoodC += woodDelta / climLen;
         fluxes.eventFineRootC += fineDelta / climLen;
         fluxes.eventCoarseRootC += coarseDelta / climLen;
+
+        // No need to allocate to biomass N pools, we don't track that N
+        // explicitly. We do need to handle litter N, though.
         // Litter N increase
         double litterNAdd = 0.0;
         const double totalAbove = (envi.plantLeafC / params.leafCN) + (envi.plantWoodC / params.woodCN);
         const double totalBelow = (envi.fineRootC / params.fineRootCN) + (envi.coarseRootC / params.woodCN);
         litterNAdd = (fracTA * totalAbove) + (fracTB * totalBelow);
-        // No need to allocate to biomass N pools, we don't track that N
-        // explicitly. We do need to handle litter N, though.
-
+        if (ctx.nitrogenCycle) {
+          fluxes.eventOrgN += litterNAdd / climLen;
+        }
         // MASS BALANCE: removed fractions are system outputs
         const double outputC = ((woodC + envi.plantLeafC) * fracRA +
                                 (envi.fineRootC + envi.coarseRootC) * fracRB);
@@ -494,7 +497,6 @@ void processEvents(void) {
                       envi.coarseRootC / params.woodCN) *
                          fracRB);
           fluxes.eventOutputN += outputN / climLen;
-          fluxes.eventOrgN += litterNAdd / climLen;
         }
 
         writeEventOut(gEvent, 7, "fluxes.eventLitterC", litterAdd / climLen,
