@@ -476,11 +476,11 @@ void processEvents(void) {
         // No need to allocate to biomass N pools, we don't track that N
         // explicitly. We do need to handle litter N, though.
         // Litter N increase
-        double litterNAdd = 0.0;
-        const double totalAbove = (envi.plantLeafC / params.leafCN) + (envi.plantWoodC / params.woodCN);
-        const double totalBelow = (envi.fineRootC / params.fineRootCN) + (envi.coarseRootC / params.woodCN);
-        litterNAdd = (fracTA * totalAbove) + (fracTB * totalBelow);
         if (ctx.nitrogenCycle) {
+          double litterNAdd = 0.0;
+          const double totalAbove = (envi.plantLeafC / params.leafCN) + (envi.plantWoodC / params.woodCN);
+          const double totalBelow = (envi.fineRootC / params.fineRootCN) + (envi.coarseRootC / params.woodCN);
+          litterNAdd = (fracTA * totalAbove) + (fracTB * totalBelow);
           fluxes.eventOrgN += litterNAdd / climLen;
         }
         // MASS BALANCE: removed fractions are system outputs
