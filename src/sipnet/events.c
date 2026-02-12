@@ -502,7 +502,7 @@ void processEvents(void) {
                       "fluxes.eventWoodC", woodDelta / climLen,
                       "fluxes.eventFineRootC", fineDelta / climLen,
                       "fluxes.eventCoarseRootC", coarseDelta / climLen,
-                      "fluxes.eventOrgN", litterNAdd / climLen
+                      "fluxes.eventOrgN", litterNAdd / climLen,
                       "fluxes.eventOutputC", outputC / climLen,
                       "fluxes.eventOutputN", outputN / climLen);
       } break;
