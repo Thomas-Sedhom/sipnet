@@ -423,12 +423,23 @@ void processEvents(void) {
         fluxes.eventFineRootC += fineDelta / climLen;
         fluxes.eventCoarseRootC += coarseDelta / climLen;
 
+        // Litter N increase
+        double litterNAdd = 0.0;
+        const double totalAbove = (envi.plantLeafC / params.leafCN) + (envi.plantWoodC / params.woodCN);
+        const double totalBelow = (envi.fineRootC / params.fineRootCN) + (envi.coarseRootC / params.woodCN);
+        litterNAdd = (fracTA * totalAbove) + (fracTB * totalBelow);
+        // Pool N updates
+        if (ctx.nitrogenCycle) {
+          fluxes.eventOrgN += litterNAdd / climLen;
+        }
         // FUTURE: move/remove biomass in N pools
         writeEventOut(gEvent, 5, "fluxes.eventLitterC", litterAdd / climLen,
                       "fluxes.eventLeafC", leafDelta / climLen,
                       "fluxes.eventWoodC", woodDelta / climLen,
                       "fluxes.eventFineRootC", fineDelta / climLen,
-                      "fluxes.eventCoarseRootC", coarseDelta / climLen);
+                      "fluxes.eventCoarseRootC", coarseDelta / climLen,
+                      "fluxes.eventOrgN", litterNAdd / climLen
+                      );
       } break;
       case TILLAGE: {
         // BIG NOTE: this is the one event type that is NOT modeled as a flux;
