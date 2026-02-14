@@ -351,7 +351,7 @@ void resetEventFluxes(void) {
   fluxes.eventSoilWater = 0.0;
   fluxes.eventLitterC = 0.0;
   fluxes.eventMinN = 0.0;
-  fluxes.eventOrgN = 0.0;
+  fluxes.eventLitterN = 0.0;
   // mass balance
   fluxes.eventInputC = 0.0;
   fluxes.eventOutputC = 0.0;
@@ -476,12 +476,12 @@ void processEvents(void) {
         // No need to allocate to biomass N pools, we don't track that N
         // explicitly. We do need to handle litter N, though.
         // Litter N increase
+        double litterNAdd = 0.0;
         if (ctx.nitrogenCycle) {
-          double litterNAdd = 0.0;
           const double totalAbove = (envi.plantLeafC / params.leafCN) + (envi.plantWoodC / params.woodCN);
           const double totalBelow = (envi.fineRootC / params.fineRootCN) + (envi.coarseRootC / params.woodCN);
           litterNAdd = (fracTA * totalAbove) + (fracTB * totalBelow);
-          fluxes.eventOrgN += litterNAdd / climLen;
+          fluxes.eventLitterN += litterNAdd / climLen;
         }
         // MASS BALANCE: removed fractions are system outputs
         const double outputC = ((woodC + envi.plantLeafC) * fracRA +
@@ -531,7 +531,7 @@ void processEvents(void) {
           minN = 0.0;
         }
         fluxes.eventLitterC += orgC / climLen;
-        fluxes.eventOrgN += orgN / climLen;
+        fluxes.eventLitterN += orgN / climLen;
         fluxes.eventMinN += minN / climLen;
 
         // MASS BALANCE: this is a system input
@@ -579,7 +579,7 @@ void updatePoolsForEvents(void) {
   // Note: litter_pool is required for nitrogen_cycle
   if (ctx.nitrogenCycle) {
     envi.minN += fluxes.eventMinN * climate->length;
-    envi.litterN += fluxes.eventOrgN * climate->length;
+    envi.litterN += fluxes.eventLitterN * climate->length;
   }
 }
 

@@ -603,8 +603,8 @@ typedef struct FluxVars {
   double eventLitterC;
   // nitrogen added to soil mineral N pool
   double eventMinN;
-  // nitrogen added to litter N pool (if used) or soil N pool (if not)
-  double eventOrgN;
+  // nitrogen added to litter N pool
+  double eventLitterN;
   // MASS BALANCE HELPERS
   // Total system carbon input, for mass balance checks
   double eventInputC;
