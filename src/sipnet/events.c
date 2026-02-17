@@ -479,8 +479,10 @@ void processEvents(void) {
         // Litter N increase
         double litterNAdd = 0.0;
         if (ctx.nitrogenCycle) {
-          const double totalAbove = (envi.plantLeafC / params.leafCN) + (envi.plantWoodC / params.woodCN);
-          const double totalBelow = (envi.fineRootC / params.fineRootCN) + (envi.coarseRootC / params.woodCN);
+          const double totalAbove = (envi.plantLeafC / params.leafCN) +
+                                    (envi.plantWoodC / params.woodCN);
+          const double totalBelow = (envi.fineRootC / params.fineRootCN) +
+                                    (envi.coarseRootC / params.woodCN);
           litterNAdd = (fracTA * totalAbove) + (fracTB * totalBelow);
           fluxes.eventLitterN += litterNAdd / climLen;
         }
@@ -500,14 +502,13 @@ void processEvents(void) {
           fluxes.eventOutputN += outputN / climLen;
         }
 
-        writeEventOut(gEvent, 8, "fluxes.eventLitterC", litterAdd / climLen,
-                      "fluxes.eventLeafC", leafDelta / climLen,
-                      "fluxes.eventWoodC", woodDelta / climLen,
-                      "fluxes.eventFineRootC", fineDelta / climLen,
-                      "fluxes.eventCoarseRootC", coarseDelta / climLen,
-                      "fluxes.eventLitterN", litterNAdd / climLen,
-                      "fluxes.eventOutputC", outputC / climLen,
-                      "fluxes.eventOutputN", outputN / climLen);
+        writeEventOut(
+            gEvent, 8, "fluxes.eventLitterC", litterAdd / climLen,
+            "fluxes.eventLeafC", leafDelta / climLen, "fluxes.eventWoodC",
+            woodDelta / climLen, "fluxes.eventFineRootC", fineDelta / climLen,
+            "fluxes.eventCoarseRootC", coarseDelta / climLen,
+            "fluxes.eventLitterN", litterNAdd / climLen, "fluxes.eventOutputC",
+            outputC / climLen, "fluxes.eventOutputN", outputN / climLen);
       } break;
       case TILLAGE: {
         // BIG NOTE: this is the one event type that is NOT modeled as a flux;
