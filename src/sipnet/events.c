@@ -500,7 +500,7 @@ void processEvents(void) {
           fluxes.eventOutputN += outputN / climLen;
         }
 
-        writeEventOut(gEvent, 7, "fluxes.eventLitterC", litterAdd / climLen,
+        writeEventOut(gEvent, 8, "fluxes.eventLitterC", litterAdd / climLen,
                       "fluxes.eventLeafC", leafDelta / climLen,
                       "fluxes.eventWoodC", woodDelta / climLen,
                       "fluxes.eventFineRootC", fineDelta / climLen,
