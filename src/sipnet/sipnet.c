@@ -423,7 +423,7 @@ void outputHeader(FILE *out) {
   fprintf(out, "litter  soilWater soilWetnessFrac     snow      ");
   fprintf(out, "npp      nee   cumNEE      gpp rAboveground    rSoil    "
                "rRoot       ra       rh     rtot evapotranspiration ");
-  fprintf(out, "fluxestranspiration     minN  soilOrgN    litterN   n2oFlux "
+  fprintf(out, "fluxestranspiration     minN  soilOrgN    litterN   n2o "
                "nLeachFlux      ch4  nppStorage  bcdeltaC  bcdeltaN\n");
 }
 
@@ -1493,6 +1493,8 @@ void updateTrackers(double oldSoilWater) {
   trackers.totNpp += trackers.npp;
   trackers.totNee += trackers.nee;
   trackers.woodCreation = fluxes.woodCreation * climate->length;
+  trackers.n2o = fluxes.nVolatilization * climate->length;
+
 
   // evapotranspiration includes water lost to evaporation from canopy
   // irrigation (fluxes.eventEvap)
