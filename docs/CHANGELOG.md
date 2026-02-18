@@ -51,6 +51,7 @@ sections to include in release notes:
 ### Changed
 
 ### Removed
+- 'Notes' line at top of `sipnet.out` header (#267)
 
 - MICROBES option and related code (#257)
 
