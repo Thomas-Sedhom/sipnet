@@ -423,10 +423,9 @@ void outputHeader(FILE *out) {
   fprintf(out, "litter  soilWater soilWetnessFrac     snow      ");
   fprintf(out, "npp      nee   cumNEE      gpp rAboveground    rSoil    "
                "rRoot       ra       rh     rtot evapotranspiration ");
-  fprintf(out, "fluxestranspiration     minN  soilOrgN    litterN   n2o   "
-               "nLeachFlux      ch4   nppStorage    bcdeltaC  bcdeltaN\n");
+  fprintf(out, "fluxestranspiration     minN  soilOrgN    litterN   n2o "
+               "nLeachFlux      ch4  nppStorage  bcdeltaC  bcdeltaN\n");
 }
-
 /*!
  * Print current state values to output file
  * @param out File pointer for output
