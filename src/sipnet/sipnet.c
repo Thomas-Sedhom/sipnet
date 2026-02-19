@@ -1494,7 +1494,6 @@ void updateTrackers(double oldSoilWater) {
   trackers.woodCreation = fluxes.woodCreation * climate->length;
   trackers.n2o = fluxes.nVolatilization * climate->length;
 
-
   // evapotranspiration includes water lost to evaporation from canopy
   // irrigation (fluxes.eventEvap)
   trackers.evapotranspiration =
